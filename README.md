@@ -1,4 +1,4 @@
-Formula Parser [![Build Status](https://travis-ci.org/handsontable/formula-parser.png?branch=master)](https://travis-ci.org/handsontable/formula-parser) [![Test Coverage](https://codeclimate.com/github/handsontable/formula-parser/badges/coverage.svg)](https://codeclimate.com/github/handsontable/formula-parser/coverage) [![hot-formula-parser](https://img.shields.io/npm/v/hot-formula-parser.svg)](https://www.npmjs.com/package/hot-formula-parser)
+Formula Parser [![Build Status](https://travis-ci.org/yujunlong2000/formula-parser.png?branch=master)](https://travis-ci.org/yujunlong2000/formula-parser) [![Test Coverage](https://codeclimate.com/github/yujunlong2000/formula-parser/badges/coverage.svg)](https://codeclimate.com/github/yujunlong2000/formula-parser/coverage) [![formula-parser](https://img.shields.io/npm/v/formula-parser.svg)](https://www.npmjs.com/package/@logoran/formula-parser)
 ==========
 Library provides a `Parser` class that evaluates excel and mathematical formulas.
 
@@ -9,12 +9,12 @@ Library provides a `Parser` class that evaluates excel and mathematical formulas
 A recommended way to install Formula Parser is through [NPM](https://www.npmjs.com/) using the following command:
 
 ```sh
-$ npm install hot-formula-parser --save
+$ npm install @logoran/formula-parser --save
 ```
 
 Node.js:
 ```js
-var FormulaParser = require('hot-formula-parser').Parser;
+var FormulaParser = require('@logoran/formula-parser').Parser;
 var parser = new FormulaParser();
 
 parser.parse('SUM(1, 6, 7)'); // It returns `Object {error: null, result: 14}`
@@ -22,7 +22,7 @@ parser.parse('SUM(1, 6, 7)'); // It returns `Object {error: null, result: 14}`
 
 Browser:
 ```html
-<script src="/node_modules/hot-formula-parser/dist/formula-parser.min.js"></script>
+<script src="/node_modules/@logoran/formula-parser/dist/formula-parser.min.js"></script>
 <script>
 var parser = new formulaParser.Parser();
 
@@ -39,7 +39,7 @@ It supports:
  * Comparison operations like `=`, `>`, `>=`, `<`, `<=`, `<>`;
  * All JavaScript Math constants like `PI()`, `E()`, `LN10()`, `LN2()`, `LOG10E()`, `LOG2E()`, `SQRT1_2()`, `SQRT2()`;
  * String operations like `&` (concatenation eq. `parser.parse('-(2&5)');` will return `-25`);
- * All excel formulas defined in [formula.js](https://github.com/handsontable/formula.js);
+ * All excel formulas defined in [formula.js](https://github.com/yujunlong2000/formula.js);
  * Relative and absolute cell coordinates like `A1`, `$A1`, `A$1`, `$A$1`;
  * Build-in variables like `TRUE`, `FALSE`, `NULL`
  * Custom variables;
@@ -126,7 +126,7 @@ parser.getFunction('ADD_5')([1]); // returns `6`
 List of all supported formulas function.
 
 ```js
-require('hot-formula-parser').SUPPORTED_FORMULAS; // An array of formula names
+require('@logoran/formula-parser').SUPPORTED_FORMULAS; // An array of formula names
 ```
 
 ## API (hooks)
@@ -227,12 +227,8 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Changelog
 
-To see the list of recent changes, see [Releases section](https://github.com/handsontable/formula-parser/releases).
+To see the list of recent changes, see [Releases section](https://github.com/yujunlong2000/formula-parser/releases).
 
 ### License
 
-The MIT License (see the [LICENSE](https://github.com/handsontable/formula-parser/blob/master/LICENSE) file for the full text).
-
-### Contact
-
-You can contact us at hello@handsontable.com.
+The MIT License (see the [LICENSE](https://github.com/yujunlong2000/formula-parser/blob/master/LICENSE) file for the full text).

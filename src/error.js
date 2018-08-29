@@ -6,6 +6,7 @@ export const ERROR_NULL = 'NULL';
 export const ERROR_NUM = 'NUM';
 export const ERROR_REF = 'REF';
 export const ERROR_VALUE = 'VALUE';
+export const ERROR_MEMBER_UNEXIST = 'M/U';
 
 const errors = {
   [ERROR]: '#ERROR!',
@@ -16,6 +17,7 @@ const errors = {
   [ERROR_NUM]: '#NUM!',
   [ERROR_REF]: '#REF!',
   [ERROR_VALUE]: '#VALUE!',
+  [ERROR_MEMBER_UNEXIST]: '#M/U',
 };
 
 /**

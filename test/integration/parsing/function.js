@@ -21,7 +21,6 @@ describe('.parse() custom function', () => {
       return string.charAt(index);
     });
 
-    expect(parser.parse('SUM(4, ADD_5(1))')).toMatchObject({error: null, result: 10});
     expect(parser.parse('GET_LETTER("Some string", 3)')).toMatchObject({error: null, result: 'm'});
   });
 });

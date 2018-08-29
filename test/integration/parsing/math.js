@@ -53,6 +53,18 @@ describe('.parse() math', () => {
     expect(parser.parse('("Hello" & " world") & "!"')).toMatchObject({error: null, result: 'Hello world!'});
   });
 
+  it('operator: %', () => {
+    expect(parser.parse('5 % 2')).toMatchObject({ error: null, result: 1 });
+    expect(parser.parse('5 % 0')).toMatchObject({ error: '#DIV/0!', result: null });
+    expect(parser.parse('"foo" % 4')).toMatchObject({ error: '#VALUE!', result: null });
+  });
+
+  it('operator: n%', () => {
+    expect(parser.parse('5%')).toMatchObject({ error: null, result: 0.05 });
+    expect(parser.parse('(5 * 2)%')).toMatchObject({ error: null, result: 0.1 });
+    expect(parser.parse('"foo" %')).toMatchObject({ error: null, result: 0 });
+  });
+
   it('mixed operators', () => {
     expect(parser.parse('1 + 10 - 20 * 3/2')).toMatchObject({error: null, result: -19});
     expect(parser.parse('((1 + 10 - 20 * 3 / 2) + 20) * 10')).toMatchObject({error: null, result: 10});

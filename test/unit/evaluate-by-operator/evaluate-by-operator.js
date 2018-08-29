@@ -43,12 +43,6 @@ describe('.evaluateByOperator()', () => {
     }).not.toThrow();
   });
 
-  it('should not to throw exception for `formula function` operator', () => {
-    expect(() => {
-      evaluateByOperator('SUM', [2, 8.8]);
-    }).not.toThrow();
-  });
-
   it('should not to throw exception for `greater than` operator', () => {
     expect(() => {
       evaluateByOperator('>', [2, 8.8]);

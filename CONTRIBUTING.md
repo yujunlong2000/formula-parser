@@ -11,7 +11,3 @@ To help us merge your Pull Request, please make sure you follow these points:
 6. **Very important:** Make Pull Request ready to merge into `develop` branch.
 
 Thank you for your commitment!
-
-## Team rules
-
-The Handsontable team utilizes Git-Flow. See [How we use Git-Flow](https://github.com/handsontable/handsontable/wiki/How-we-use-Git-Flow)

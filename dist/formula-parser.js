@@ -822,6 +822,10 @@ var _error = __webpack_require__(0);
 var SYMBOL = exports.SYMBOL = '%';
 
 function func(first) {
+  if (isNaN(first)) {
+    throw Error(_error.ERROR_VALUE);
+  }
+
   for (var _len = arguments.length, rest = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     rest[_key - 1] = arguments[_key];
   }
@@ -830,11 +834,8 @@ function func(first) {
     return acc % (0, _number.toNumber)(value);
   }, (0, _number.toNumber)(first));
 
-  if (result === Infinity) {
-    throw Error(_error.ERROR_DIV_ZERO);
-  }
   if (isNaN(result)) {
-    throw Error(_error.ERROR_VALUE);
+    throw Error(_error.ERROR_DIV_ZERO);
   }
 
   return result;
@@ -1172,8 +1173,7 @@ case 2:
       this.$ = yy.callVariable($$[$0][0]);
       for(var i = 1; i < $$[$0].length; ++i) {
         if (undefined === this.$[$$[$0][i]]) {
-          this.$ = yy.throwError('#M/U');
-          break;
+          yy.throwError('#M/U');
         }
         this.$ = this.$[$$[$0][i]];
       }

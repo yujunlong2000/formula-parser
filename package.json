@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/handsontable/formula-parser.git"
+    "url": "https://github.com/yujunlong2000/formula-parser.git"
   },
   "keywords": [
     "formula",
@@ -33,12 +33,12 @@
     "excel",
     "spreadsheet"
   ],
-  "author": "Handsoncode <hello@handsontable.com>",
+  "author": "Leo <yujunlong2000@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/handsontable/formula-parser/issues"
+    "url": "https://github.com/yujunlong2000/formula-parser/issues"
   },
-  "homepage": "https://github.com/handsontable/formula-parser",
+  "homepage": "https://github.com/yujunlong2000/formula-parser",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
@@ -82,7 +82,6 @@
     "webpack": "^3.2.0"
   },
   "dependencies": {
-    "@handsontable/formulajs": "^2.0.0",
     "tiny-emitter": "^2.0.1"
   },
   "jest": {

@@ -13,4 +13,12 @@ export default function func(exp1, exp2) {
   return result;
 }
 
+func.trans = function (exp1, exp2) {
+  if (typeof exp1 === 'number' && typeof exp2 === 'number') {
+    return Math.pow(toNumber(exp1), toNumber(exp2));
+  } else {
+    return `pow(${exp1}, ${exp2})`;
+  }
+}
+
 func.SYMBOL = SYMBOL;

@@ -16,4 +16,23 @@ export default function func(first, ...rest) {
   return result;
 }
 
+func.trans = function (first, ...rest) {
+  if (isNaN(first)) {
+    throw Error(ERROR_VALUE);
+  }
+  const result = rest.reduce(function (acc, value) {
+    if (typeof acc === 'number' && typeof value === 'number') {
+      return acc % value;
+    } else {
+      return `${acc} % ${value}`;
+    }
+  }, first);
+
+  if (isNaN(result)) {
+    throw Error(ERROR_DIV_ZERO);
+  }
+
+  return result;
+}
+
 func.SYMBOL = SYMBOL;

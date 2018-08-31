@@ -1,6 +1,8 @@
 import Emitter from 'tiny-emitter';
 import evaluateByOperator from './evaluate-by-operator/evaluate-by-operator';
-import {Parser as GrammarParser} from './grammar-parser/grammar-parser';
+import transByOperator from './evaluate-by-operator/trans-by-operator';
+import { Parser as GrammarParser } from './grammar-parser/grammar-parser';
+import { Parser as GrammarTranslater } from './grammar-parser/grammar-translater';
 import {trimEdges} from './helper/string';
 import {toNumber, invertNumber} from './helper/number';
 import errorParser, {isValidStrict as isErrorValid, ERROR, ERROR_NAME} from './error';
@@ -20,6 +22,14 @@ class Parser extends Emitter {
       callVariable: (variable) => this._callVariable(variable),
       evaluateByOperator,
       callFunction: (name, params) => this._callFunction(name, params),
+    };
+    this.translater = new GrammarTranslater();
+    this.translater.yy = {
+      toNumber,
+      throwError: (errorName) => this._throwError(errorName),
+      transVariable: (variable) => this._transVariable(variable),
+      transByOperator,
+      transFunction: (name, params) => this._transFunction(name, params),
     };
     this.variables = Object.create(null);
     this.functions = Object.create(null);
@@ -45,6 +55,43 @@ class Parser extends Emitter {
         result = '';
       } else {
         result = this.parser.parse(expression);
+      }
+    } catch (ex) {
+      const message = errorParser(ex.message);
+
+      if (message) {
+        error = message;
+      } else {
+        error = errorParser(ERROR);
+      }
+    }
+
+    if (result instanceof Error) {
+      error = errorParser(result.message) || errorParser(ERROR);
+      result = null;
+    }
+
+    return {
+      error,
+      result,
+    };
+  }
+
+  /**
+   * Translate formula expression.
+   *
+   * @param {String} expression to parse.
+   * @return {*} Returns an object with tow properties `error` and `result`.
+   */
+  translate(expression) {
+    let result = null;
+    let error = null;
+
+    try {
+      if (expression === '') {
+        result = '';
+      } else {
+        result = this.translater.parse(expression);
       }
     } catch (ex) {
       const message = errorParser(ex.message);
@@ -114,6 +161,23 @@ class Parser extends Emitter {
   }
 
   /**
+   * Translate variable value by its name.
+   *
+   * @param name Variable name.
+   * @returns {*}
+   * @private
+   */
+  _transVariable(name) {
+    let value = this.getVariable(name);
+
+    if (value === void 0 || typeof value !== 'string') {
+      return `${name}`;
+    }
+
+    return `${value}`;
+  }
+
+  /**
    * Set custom function which can be visible while parsing formula expression.
    *
    * @param {String} name Custom function name.
@@ -159,6 +223,26 @@ class Parser extends Emitter {
     });
 
     return value === void 0 ? evaluateByOperator(name, params) : value;
+  }
+
+  /**
+   * Translate function with provided params.
+   *
+   * @param name Function name.
+   * @param params Function params.
+   * @returns {*}
+   * @private
+   */
+  _transFunction(name, params = []) {
+    const fn = this.getFunction(name);
+    let value;
+
+    if (fn) {
+      return fn(params);
+    }
+
+    params = params.join(', ');
+    return `${name}(${params})`;
   }
 
   /**
